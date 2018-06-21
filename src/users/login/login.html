@@ -1,0 +1,34 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Login</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content >
+    <ion-item padding>
+        <ion-label floating>login</ion-label>
+        <ion-input [(ngModel)]="user.nickname"></ion-input>
+    </ion-item>
+
+    <ion-grid>
+        <ion-row>
+          <ion-col>
+              <button ion-button  (click)="connexion()" full color="secondary">
+                  Login
+              </button>
+          </ion-col>
+          
+        </ion-row>
+        <ion-row>
+            <ion-col>
+                <button ion-button  (click)="inscription()" full outline>
+                    Inscription
+                </button>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+
+</ion-content>
