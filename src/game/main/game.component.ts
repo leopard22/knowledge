@@ -7,6 +7,7 @@ import { GameService } from '../gameService';
 import { Question, Answer } from '../gameModel';
 import { ViewChild } from '@angular/core';
 import { Slides } from 'ionic-angular';
+import { User } from '../../users/userModel';
 
 
 
@@ -25,11 +26,16 @@ import { Slides } from 'ionic-angular';
     // public myAnswer:Answer;
     public start = false;
     public slidePage = 0;
+    public user: User = {nickname:'',avatar_url:'',score:0,time:0};
+    public timeStart: number = 0;
+    public nickname: string;
     
 
 
     constructor( public navCtrl: NavController, public param: NavParams, public userService: UsersService, public gameService: GameService){
-      
+      console.log(param.get("user"))
+      this.nickname=param.get("user");
+
     }
 
     ionViewWillEnter(){
@@ -42,8 +48,8 @@ import { Slides } from 'ionic-angular';
       console.log("le jeu commence");
       this.start = true;
       console.log(this.questions);
-      
-     // this.gameService.getQuestion(); atob
+
+      this.timeStart = this.timer();      
 
     }
 
@@ -53,7 +59,7 @@ import { Slides } from 'ionic-angular';
     }
 
     timer(){
-
+      return Date.now();
     }
 
     gotoBoard(){
@@ -73,7 +79,7 @@ import { Slides } from 'ionic-angular';
         this.slidePage = this.questions.length - 1;
         console.log(this.slidePage +" === "+ this.questions.length);
         this.start = false;
-        this.gameEnd( this.answers );
+        this.gameEnd( );
       }
       this.slides.slideTo(this.slidePage, 500);
 
@@ -101,31 +107,27 @@ import { Slides } from 'ionic-angular';
         this.score = this.score - 10;
       }
     }
-    gameEnd(tabAnswer){
+    gameEnd(){
 
-      console.log(tabAnswer);
-      // for(let i=0; i < this.questions.length; i++){
-      //   if (tabAnswer[i].reponse == this.questions[i].correct_answer) {
-      //     this.scoreGame(true);
-      //   } else {
-      //     this.scoreGame(false);
-      //   }
-      //   console.log("le score est de : "+ this.score);
-      // }
+      let timeEnd = this.timer() - this.timeStart;
 
+      this.user.nickname = this.nickname;
+
+      this.user.time =  Math.floor(timeEnd/1000);
+
+      this.user.score = this.score;
+
+      console.log(this.user);
       
     }
 
-    getScore(){
-      return this.score;
-    }
 
-    // toLeaderBoard(){
-    //   this.userService.addUser(this.user).subscribe(response =>{ response.json();
+    toLeaderBoard(){
+      this.userService.addUser(this.user).subscribe(response =>{ response.json();
             
-    //     console.log(response.json())}),error => error.json();
+        console.log(response.json())}),error => error.json();
   
-    //     this.navCtrl.push(Login);
-    // }
+        this.navCtrl.push(LeaderBoard,this.user);
+    }
 
   }

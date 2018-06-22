@@ -33,8 +33,8 @@ export class Login {
 
 
   connexion(){   
-      console.log(this.user.nickname);
-      this.navCtrl.push(Game);
+      this.navCtrl.push(Game,{user:this.user} );
   }
+  // enregistrer le nom et avatar du user dans localstorage et le récupperer partout dans l'application
 
 }

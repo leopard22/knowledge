@@ -14,7 +14,7 @@
             </ion-card-header>
             
             <ion-card-content>
-                Ton score est de : {{ score }}
+             {{ user.nickname }}   Ton score est de : {{ score }}
             </ion-card-content>
             
         </ion-card>
@@ -60,7 +60,7 @@
                 <button ion-button (click)="gotoBoard()" full icon-start><ion-icon name="stats"> </ion-icon> leader board</button>
             </ion-col>
             <ion-col>
-                <button ion-button (click)="getLeaderBoard()" full icon-start><ion-icon name="share-alt"></ion-icon> Partager</button>
+                <button ion-button (click)="toLeaderBoard()" full icon-start><ion-icon name="share-alt"></ion-icon> Partager</button>
             </ion-col>
         </ion-row>
     </ion-grid>
