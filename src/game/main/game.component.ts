@@ -71,7 +71,8 @@ import { Slides } from 'ionic-angular';
       if(this.slidePage == this.questions.length)
       {
         this.slidePage = this.questions.length - 1;
-        console.log(this.slidePage +" === "+ this.questions.length)
+        console.log(this.slidePage +" === "+ this.questions.length);
+        this.start = false;
         this.gameEnd( this.answers );
       }
       this.slides.slideTo(this.slidePage, 500);

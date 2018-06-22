@@ -6,6 +6,21 @@
 
 <ion-content>
 
+    <div>
+        <ion-card>
+    
+            <ion-card-header>
+                Resultat
+            </ion-card-header>
+            
+            <ion-card-content>
+                Ton score est de : {{ score }}
+            </ion-card-content>
+            
+        </ion-card>
+    </div>
+
+
     <ion-grid *ngIf="!start">
         <ion-row *ngIf="questions">
             <ion-col col-12 style="text-align: center">
@@ -35,9 +50,6 @@
                 </ion-slide>
         </ion-slides>
 </div>
-
-    
-
 
 
 </ion-content>
