@@ -17,17 +17,21 @@
         </ion-row>
     </ion-grid>
 
+    <!-- affichage des questions à la suite + choix des reponses 
+         à chaque question répondu il y a un changement de question jusqu'à la fin des questions 
+    -->
 
 <div *ngIf="start">
         <ion-slides (ionSlideDidChange)="questionChanged()">
                 <ion-slide *ngFor="let question of questions" >
                   <h1>{{ question.question }}</h1>
                   <p> 
-                      <button ion-button outline round color="secondary" icon-only><ion-icon name="thumbs-up"></ion-icon></button> 
-                      <button ion-button outline round color="danger" icon-only><ion-icon name="thumbs-down"></ion-icon></button>
+                      <button (click)="answer('true')" ion-button outline round color="secondary" icon-only><ion-icon name="thumbs-up"></ion-icon></button> 
+                      <button (click)="answer('false')" ion-button outline round color="danger" icon-only><ion-icon name="thumbs-down"></ion-icon></button>
                     </p>
-                  <button (click)="goToSlide(-1)" ion-button><ion-icon name="arrow-back"></ion-icon></button>
-                  <button (click)="goToSlide(1)" ion-button><ion-icon name="arrow-forward"></ion-icon></button>
+                  <!--
+                       <button (click)="goToSlide(-1)" ion-button><ion-icon name="arrow-back"></ion-icon></button>
+                  <button (click)="goToSlide(1)" ion-button><ion-icon name="arrow-forward"></ion-icon></button>  -->
                 </ion-slide>
         </ion-slides>
 </div>

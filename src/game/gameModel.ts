@@ -8,7 +8,7 @@ interface Question {
 }
 
 interface Answer{
-    question: string,
+    question: number,
     reponse: string
 }
 

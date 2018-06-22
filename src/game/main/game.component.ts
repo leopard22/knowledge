@@ -21,14 +21,15 @@ import { Slides } from 'ionic-angular';
     public score: number = 0 ;
     public nbQuestion = 20 ;
     public questions: Question[];
-    public myAnswer: Answer[];
+    public answers: Array<Object>=[];
+    // public myAnswer:Answer;
     public start = false;
     public slidePage = 0;
     
 
 
     constructor( public navCtrl: NavController, public param: NavParams, public userService: UsersService, public gameService: GameService){
-
+      
     }
 
     ionViewWillEnter(){
@@ -41,6 +42,7 @@ import { Slides } from 'ionic-angular';
       console.log("le jeu commence");
       this.start = true;
       console.log(this.questions);
+      
      // this.gameService.getQuestion(); atob
 
     }
@@ -70,16 +72,23 @@ import { Slides } from 'ionic-angular';
       {
         this.slidePage = this.questions.length - 1;
         console.log(this.slidePage +" === "+ this.questions.length)
+        this.gameEnd( this.answers );
       }
       this.slides.slideTo(this.slidePage, 500);
 
     }
   
     answer(answer){
-      this.slides.getActiveIndex();
-    this.myAnswer[this.slides.getActiveIndex()] = answer;
-    this.goToSlide(1);
 
+      const myAnswer: Answer= {question:0, reponse:''};
+      console.log(this.slides.getActiveIndex()+" answer method");
+      console.log(answer+" answer method");      
+      
+      myAnswer.question = this.slides.getActiveIndex();
+      myAnswer.reponse = answer;
+
+      this.answers.push(myAnswer);
+      this.goToSlide(1);
     }
 
     scoreGame(answer){
@@ -88,6 +97,20 @@ import { Slides } from 'ionic-angular';
       }else{
         this.score = this.score - 10;
       }
+    }
+    gameEnd(tabAnswer){
+
+      console.log(tabAnswer);
+      for(let i=0; i < this.questions.length; i++){
+        if (tabAnswer[i].reponse == this.questions[i].correct_answer) {
+          this.scoreGame(true);
+        } else {
+          this.scoreGame(false);
+        }
+        console.log("le score est de : "+ this.score);
+      }
+
+      
     }
 
     getScore(){
