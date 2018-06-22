@@ -89,11 +89,13 @@ import { Slides } from 'ionic-angular';
       myAnswer.reponse = answer;
 
       this.answers.push(myAnswer);
+      this.scoreGame(answer,this.slides.getActiveIndex())
       this.goToSlide(1);
     }
 
-    scoreGame(answer){
-      if(answer == true){
+    scoreGame(answer,position){
+
+      if(this.questions[position].correct_answer == answer){
         this.score = this.score + 10;
       }else{
         this.score = this.score - 10;
@@ -102,14 +104,14 @@ import { Slides } from 'ionic-angular';
     gameEnd(tabAnswer){
 
       console.log(tabAnswer);
-      for(let i=0; i < this.questions.length; i++){
-        if (tabAnswer[i].reponse == this.questions[i].correct_answer) {
-          this.scoreGame(true);
-        } else {
-          this.scoreGame(false);
-        }
-        console.log("le score est de : "+ this.score);
-      }
+      // for(let i=0; i < this.questions.length; i++){
+      //   if (tabAnswer[i].reponse == this.questions[i].correct_answer) {
+      //     this.scoreGame(true);
+      //   } else {
+      //     this.scoreGame(false);
+      //   }
+      //   console.log("le score est de : "+ this.score);
+      // }
 
       
     }
