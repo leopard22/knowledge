@@ -31,4 +31,12 @@ export class HttpService {
         options.headers = this.getHeaders();
         return this.http.post(this.config.API_URL + resource,data,options);
     }
+
+    getGame(){
+        const options = new RequestOptions();
+        options.headers = this.getHeaders()
+        return this.http.get(this.config.API_GAME );
+    }
+
+    postGame(){}
 }

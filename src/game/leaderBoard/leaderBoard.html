@@ -5,4 +5,28 @@
     </ion-header>
            
 <ion-content >
+    <ion-item>
+            <ion-grid>
+                    <ion-row>
+                        <ion-col> Nickname </ion-col>
+                        <ion-col> Score </ion-col>
+                        <ion-col> Temps </ion-col>  
+                    </ion-row>
+                </ion-grid>
+    </ion-item>
+        <ion-item *ngFor="let board of leaderBoard">
+            <ion-grid>
+                <ion-row>
+                    <ion-col> {{ board.nickname }} </ion-col>
+                    <ion-col> {{ board.score }} </ion-col>
+                    <ion-col> {{ board.time }} </ion-col>  
+                </ion-row>
+            </ion-grid>
+        </ion-item>
+   
+
+    
 </ion-content>
+<ion-footer>
+    <button ion-button (click)="returnOnGame()" color="secondary" full> Retour au jeu</button>
+</ion-footer>

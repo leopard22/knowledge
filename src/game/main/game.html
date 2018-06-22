@@ -1,40 +1,51 @@
 <ion-header>
     <ion-navbar>
         <ion-title>GAME</ion-title>
-    </ion-navbar>    
+    </ion-navbar>
 </ion-header>
-       
-<ion-content >
 
-<ion-grid>
-    <ion-row>
-        <button ion-button round outline color="secondary" (click)="startGame()" >
-        START
-        </button>
-    </ion-row>
-</ion-grid>
+<ion-content>
+
+    <ion-grid *ngIf="!start">
+        <ion-row *ngIf="questions">
+            <ion-col col-12 style="text-align: center">
+                    <button ion-button round outline color="secondary" (click)="startGame()">
+                            START
+                        </button>
+            </ion-col>
+            
+        </ion-row>
+    </ion-grid>
+
+
+<div *ngIf="start">
+        <ion-slides (ionSlideDidChange)="questionChanged()">
+                <ion-slide *ngFor="let question of questions" >
+                  <h1>{{ question.question }}</h1>
+                  <p> 
+                      <button ion-button outline round color="secondary" icon-only><ion-icon name="thumbs-up"></ion-icon></button> 
+                      <button ion-button outline round color="danger" icon-only><ion-icon name="thumbs-down"></ion-icon></button>
+                    </p>
+                  <button (click)="goToSlide(-1)" ion-button><ion-icon name="arrow-back"></ion-icon></button>
+                  <button (click)="goToSlide(1)" ion-button><ion-icon name="arrow-forward"></ion-icon></button>
+                </ion-slide>
+        </ion-slides>
+</div>
+
+    
+
+
 
 </ion-content>
-
-
-
-<!-- <ion-footer no-border>
-    <ion-toolbar>
-        <ion-title>Footer</ion-title>
-    </ion-toolbar>
-    <ion-toolbar>
-            <ion-grid>
-                    <ion-row>
-                        <ion-col>
-                                <ion-title>Footer</ion-title>
-                        </ion-col>
-                        <ion-col>
-                                <ion-title>Footer</ion-title>
-                            </ion-col>
-                            <ion-col>
-                                    <ion-title>Footer</ion-title>
-                                </ion-col>
-                    </ion-row>
-                </ion-grid>
-    </ion-toolbar>
-</ion-footer> -->
+<ion-footer>
+    <ion-grid>
+        <ion-row>
+            <ion-col>
+                <button ion-button (click)="gotoBoard()" full icon-start><ion-icon name="stats"> </ion-icon> leader board</button>
+            </ion-col>
+            <ion-col>
+                <button ion-button (click)="getLeaderBoard()" full icon-start><ion-icon name="share-alt"></ion-icon> Partager</button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-footer>

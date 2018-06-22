@@ -13,11 +13,10 @@ import { Game } from '../../game/main/game.component';
 export class Login {
 
     public user: User;
-    public nickname: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public userService: UsersService) {
-      this.nickname = '';
+      
       this.user = { nickname: '',
                     score: 0,
                     time: 0,
@@ -32,9 +31,9 @@ export class Login {
       this.navCtrl.push(Inscription);
   }
 
-  connexion(){
-      console.log(this.user);
-      this.user.nickname = this.nickname;
+
+  connexion(){   
+      console.log(this.user.nickname);
       this.navCtrl.push(Game);
   }
 

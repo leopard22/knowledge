@@ -20,6 +20,10 @@ export class UsersService{
         return this.http.post('api/score',user);
     }
 
+    getUser(){
+        return this.http.get('api/json');
+    }
+
 
 
 }
