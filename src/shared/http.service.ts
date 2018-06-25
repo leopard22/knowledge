@@ -39,4 +39,11 @@ export class HttpService {
     }
 
     postGame(){}
+
+    getAvatar(resource){
+        localStorage.setItem('User-avatar',this.config.API_AVATAR + resource);
+    console.log("this.config.API_AVATAR+"+resource);
+        return this.http.get(this.config.API_AVATAR + resource);
+
+    }
 }

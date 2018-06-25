@@ -9,6 +9,7 @@ import { Inscription } from '../users/subscribe/inscription.component';
 import { UsersService } from "../users/userService";
 import { Game } from '../game/main/game.component';
 import { LeaderBoard } from '../game/leaderBoard/leaderBoard.component';
+import { Setting } from '../game/setting/setting.component';
 
 
 
@@ -31,7 +32,8 @@ export class MyApp {
         { title: 'Login', component: Login },
         { title: 'Inscription', component: Inscription },
         { title: 'JEU', component:Game },
-        { title: 'Leader Board', component:LeaderBoard }
+        { title: 'Leader Board', component:LeaderBoard },
+        { title: 'Réglage', component: Setting }
       ];
 
 

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { Login } from '../../users/login/login.component';
 import { LeaderBoard } from '../leaderBoard/leaderBoard.component';
 import { UsersService } from '../../users/userService';
 import { GameService } from '../gameService';
@@ -23,7 +22,6 @@ import { User } from '../../users/userModel';
     public nbQuestion = 20 ;
     public questions: Question[];
     public answers: Array<Object>=[];
-    // public myAnswer:Answer;
     public start = false;
     public slidePage = 0;
     public user: User = {nickname:'',avatar_url:'',score:0,time:0};
@@ -32,10 +30,13 @@ import { User } from '../../users/userModel';
     
 
 
-    constructor( public navCtrl: NavController, public param: NavParams, public userService: UsersService, public gameService: GameService){
-      console.log(param.get("user"))
-      this.nickname=param.get("user");
-
+    constructor( public navCtrl: NavController, public param: NavParams,
+                 public userService: UsersService, public gameService: GameService){
+      
+                  this.user.nickname = localStorage.getItem('User-nickname');
+                  this.user.avatar_url = localStorage.getItem('User-avatar');
+                console.log(this.user);
+      
     }
 
     ionViewWillEnter(){
@@ -63,7 +64,10 @@ import { User } from '../../users/userModel';
     }
 
     gotoBoard(){
-      this.navCtrl.push(LeaderBoard);
+      if( this.start == false){
+        this.navCtrl.push(LeaderBoard);
+      }
+      
     }
 
     gameLost(){}
@@ -111,8 +115,6 @@ import { User } from '../../users/userModel';
 
       let timeEnd = this.timer() - this.timeStart;
 
-      this.user.nickname = this.nickname;
-
       this.user.time =  Math.floor(timeEnd/1000);
 
       this.user.score = this.score;
@@ -123,11 +125,14 @@ import { User } from '../../users/userModel';
 
 
     toLeaderBoard(){
-      this.userService.addUser(this.user).subscribe(response =>{ response.json();
+      if(this.user.time != 0 || this.slidePage == this.questions.length){
+        this.userService.addUser(this.user).subscribe(response =>{ response.json();
             
-        console.log(response.json())}),error => error.json();
-  
-        this.navCtrl.push(LeaderBoard,this.user);
+          console.log(response.json())}),error => error.json();
+    
+          this.navCtrl.push(LeaderBoard,this.user);
+      }
+      
     }
 
   }

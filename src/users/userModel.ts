@@ -4,4 +4,12 @@ interface User{
     time: number,
     avatar_url?: string
 }
-export { User }
+
+interface Avatar{
+    eyes: string,
+    nose: string,
+    mouth: string,
+    color: string
+}
+
+export { User, Avatar }

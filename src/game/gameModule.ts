@@ -5,11 +5,12 @@ import { Game } from './main/game.component';
 import { GameService } from './gameService';
 import { SharedModule } from '../shared/httpModul';
 import { LeaderBoard } from './leaderBoard/leaderBoard.component';
+import { Setting } from './setting/setting.component';
 
 
 @NgModule({
-    declarations:[ Game, LeaderBoard ],
-    entryComponents:[ Game, LeaderBoard ],
+    declarations:[ Game, LeaderBoard, Setting ],
+    entryComponents:[ Game, LeaderBoard, Setting ],
     imports: [ BrowserModule, IonicModule, SharedModule ],
     providers:[GameService ],   
     
