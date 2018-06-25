@@ -7,6 +7,7 @@ import { Question, Answer } from '../gameModel';
 import { ViewChild } from '@angular/core';
 import { Slides } from 'ionic-angular';
 import { User } from '../../users/userModel';
+import { TextToSpeech } from '@ionic-native/text-to-speech';
 
 
 
@@ -31,11 +32,13 @@ import { User } from '../../users/userModel';
 
 
     constructor( public navCtrl: NavController, public param: NavParams,
-                 public userService: UsersService, public gameService: GameService){
+                 public userService: UsersService, public gameService: GameService,
+                 public tts: TextToSpeech){
       
                   this.user.nickname = localStorage.getItem('User-nickname');
                   this.user.avatar_url = localStorage.getItem('User-avatar');
                 console.log(this.user);
+                
       
     }
 
@@ -50,7 +53,11 @@ import { User } from '../../users/userModel';
       this.start = true;
       console.log(this.questions);
 
-      this.timeStart = this.timer();      
+      this.timeStart = this.timer();  
+      
+      this.tts.speak('Hello World')
+  .then(() => console.log('Success'))
+  .catch((reason: any) => console.log(reason));
 
     }
 

@@ -6,13 +6,14 @@ import { GameService } from './gameService';
 import { SharedModule } from '../shared/httpModul';
 import { LeaderBoard } from './leaderBoard/leaderBoard.component';
 import { Setting } from './setting/setting.component';
+import { TextToSpeech } from '@ionic-native/text-to-speech';
 
 
 @NgModule({
     declarations:[ Game, LeaderBoard, Setting ],
     entryComponents:[ Game, LeaderBoard, Setting ],
     imports: [ BrowserModule, IonicModule, SharedModule ],
-    providers:[GameService ],   
+    providers:[GameService,TextToSpeech ],   
     
   })
   
