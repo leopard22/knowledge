@@ -8,6 +8,7 @@ import { ViewChild } from '@angular/core';
 import { Slides } from 'ionic-angular';
 import { User } from '../../users/userModel';
 import { TextToSpeech } from '@ionic-native/text-to-speech';
+import { Platform } from 'ionic-angular';
 
 
 
@@ -28,17 +29,35 @@ import { TextToSpeech } from '@ionic-native/text-to-speech';
     public user: User = {nickname:'',avatar_url:'',score:0,time:0};
     public timeStart: number = 0;
     public nickname: string;
+    public text: string;
+    public rate: number;
+    public locale: string;
     
 
 
     constructor( public navCtrl: NavController, public param: NavParams,
                  public userService: UsersService, public gameService: GameService,
-                 public tts: TextToSpeech){
+                 private tts: TextToSpeech, public plt: Platform){
       
                   this.user.nickname = localStorage.getItem('User-nickname');
                   this.user.avatar_url = localStorage.getItem('User-avatar');
                 console.log(this.user);
+                // this.text = 'Initial text';
+                // this.rate = 1;
+                // this.locale = 'en-US';
+                //this.tts = new TextToSpeech();  
                 
+                // this.plt.ready().then((readySource) => {
+                //   console.log('Platform ready from', readySource);
+                  
+                //   this.tts.speak(  "option" )
+                //   .then(() => console.log('Success'))
+                //   .catch((reason: any) => console.log(reason));
+    
+                  
+
+
+                // });
       
     }
 
@@ -53,16 +72,14 @@ import { TextToSpeech } from '@ionic-native/text-to-speech';
       this.start = true;
       console.log(this.questions);
 
-      this.timeStart = this.timer();  
+      this.timeStart = this.timer();     
       
-      this.tts.speak('Hello World')
-  .then(() => console.log('Success'))
-  .catch((reason: any) => console.log(reason));
-
     }
 
     questionChanged(){
       let currentIndex = this.slides.getActiveIndex();
+
+      this.readQuestion(this.questions[currentIndex].question);
     console.log('Current index is', currentIndex);
     }
 
@@ -75,6 +92,13 @@ import { TextToSpeech } from '@ionic-native/text-to-speech';
         this.navCtrl.push(LeaderBoard);
       }
       
+    }
+
+    readQuestion(text){
+      const options = {text:text, locale:this.locale, rate: this.rate}
+      this.tts.speak(  options )
+        .then(() => console.log('Success'))
+        .catch((reason: any) => console.log(reason));
     }
 
     gameLost(){}
